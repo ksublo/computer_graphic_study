@@ -1,6 +1,3 @@
-#ifndef SHADER_H
-#define SHADER_H
-
 #include <GL/glew.h>
 
 class Shader {
@@ -14,5 +11,3 @@ private:
     GLuint programID;  
     GLuint compileShader(const char* shaderSource, GLenum shaderType); 
 };
-
-#endif
