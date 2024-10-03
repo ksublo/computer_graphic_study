@@ -1,8 +1,18 @@
+#ifndef SHADER_H
+#define SHADER_H
+
 #include <GL/glew.h>
 
-GLuint create_shader_program();
-GLuint create_shader_program1();
+class Shader {
+public:
+    Shader(const char* vertexSource, const char* fragmentSource);
+    ~Shader();
 
-GLuint create_shader_program2();
-GLuint create_shader_program3();
-GLuint create_shader_program4();
+    void use() const;  
+
+private:
+    GLuint programID;  
+    GLuint compileShader(const char* shaderSource, GLenum shaderType); 
+};
+
+#endif

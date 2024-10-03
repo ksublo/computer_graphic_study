@@ -74,6 +74,48 @@ float obj3[] = {
     -0.3f, -0.7f, 0.0f,
 };
 
+const char* vertex_shader =
+"#version 330\n"
+"layout(location=0) in vec3 vp;"
+"void main () {"
+"     gl_Position = vec4 (vp, 1.0);"
+"}";
+
+const char* fragment_shader =
+"#version 330\n"
+"out vec4 frag_colour;"
+"void main () {"
+"     frag_colour = vec4 (0.6, 0.0, 0.3, 1.0);"
+"}";
+
+const char* fragment_shader1 =
+"#version 330\n"
+"out vec4 frag_colour;"
+"void main () {"
+"     frag_colour = vec4 (0.8, 0.0, 0.3, 1.0);"
+"}";
+
+const char* fragment_shader2 =
+"#version 330\n"
+"out vec4 frag_colour;"
+"void main () {"
+"     frag_colour = vec4 (0.0, 0.4, 0.6, 1.0);"
+"}";
+
+const char* fragment_shader3 =
+"#version 330\n"
+"out vec4 frag_colour;"
+"void main () {"
+"     frag_colour = vec4 (0.0, 0.6, 0.6, 1.0);"
+"}";
+
+const char* fragment_shader4 =
+"#version 330\n"
+"out vec4 frag_colour;"
+"void main () {"
+"     frag_colour = vec4 (0.1, 0.5, 0.5, 1.0);"
+"}";
+
 static void error_callback(int error, const char* description) {
     printf("Error: %s\n", description);
 }
@@ -101,11 +143,11 @@ int main(void) {
     glewExperimental = GL_TRUE;
     glewInit();
 
-    GLuint shaderProgram = create_shader_program();
-    GLuint shaderProgram1 = create_shader_program1();
-    GLuint shaderProgram2 = create_shader_program2();
-    GLuint shaderProgram3 = create_shader_program3();
-    GLuint shaderProgram4 = create_shader_program4();
+    Shader shader(vertex_shader, fragment_shader);
+    Shader shader1(vertex_shader, fragment_shader1);
+    Shader shader2(vertex_shader, fragment_shader2);
+    Shader shader3(vertex_shader, fragment_shader3);
+    Shader shader4(vertex_shader, fragment_shader4);
 
     Object object(obj1, sizeof(obj1));
     Object object1(obj2, sizeof(obj2));
@@ -114,31 +156,31 @@ int main(void) {
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glUseProgram(shaderProgram);
+        shader.use();
         object.draw(0, 3);
 
-        glUseProgram(shaderProgram1);
+        shader1.use();
         object.draw(3, 6);
 
-        glUseProgram(shaderProgram2);
+        shader2.use();
         object1.draw(0, 6);
 
-        glUseProgram(shaderProgram3);
+        shader3.use();
         object1.draw(6, 12);
 
-        glUseProgram(shaderProgram4);
+        shader4.use();
         object1.draw(12, 18);
 
-        glUseProgram(shaderProgram2);
+        shader2.use();
         object2.draw(0, 6);
 
-        glUseProgram(shaderProgram);
+        shader.use();
         object2.draw(6, 9);
 
-        glUseProgram(shaderProgram1);
+        shader1.use();
         object2.draw(9, 15);
 
-        glUseProgram(shaderProgram3);
+        shader3.use();
         object2.draw(15, 21);
 
         glfwPollEvents();
