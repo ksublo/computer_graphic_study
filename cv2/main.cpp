@@ -134,9 +134,9 @@ int main(void) {
 
     if (!glfwInit())
         return -1;
-    
+
     GLFWwindow* window = glfwCreateWindow(800, 600, "ZPG", NULL, NULL);
-    
+
     glfwMakeContextCurrent(window);
     glfwSetKeyCallback(window, key_callback);
     glfwSetWindowSizeCallback(window, window_size_callback);
@@ -166,22 +166,22 @@ int main(void) {
         object1.draw(0, 6);
 
         shader3.use();
-        object1.draw(6, 12);
+        object1.draw(6, 6);
 
         shader4.use();
-        object1.draw(12, 18);
+        object1.draw(12, 6);
 
         shader2.use();
         object2.draw(0, 6);
 
         shader.use();
-        object2.draw(6, 9);
+        object2.draw(6, 3);
 
         shader1.use();
-        object2.draw(9, 15);
+        object2.draw(9, 6);
 
         shader3.use();
-        object2.draw(15, 21);
+        object2.draw(15, 6);
 
         glfwPollEvents();
         glfwSwapBuffers(window);
