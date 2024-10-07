@@ -2,45 +2,14 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 
-void static checkCompileErrors(GLuint shader, std::string type) {
-    GLint success;
-    GLchar infoLog[1024];
-
-    if (type != "PROGRAM") {
-        // Проверка компиляции шейдера
-        glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-        if (!success) {
-            glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-            std::cerr << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-        }
-    }
-    else {
-        // Проверка линковки программы
-        glGetProgramiv(shader, GL_LINK_STATUS, &success);
-        if (!success) {
-            glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-            std::cerr << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-        }
-    }
-}
-
 Shader::Shader(const char* vertexSource, const char* fragmentSource) {
     GLuint vertexShader = compileShader(vertexSource, GL_VERTEX_SHADER);
     GLuint fragmentShader = compileShader(fragmentSource, GL_FRAGMENT_SHADER);
-
-    // Проверка компиляции вершинного шейдера
-    checkCompileErrors(vertexShader, "VERTEX");
-
-    // Проверка компиляции фрагментного шейдера
-    checkCompileErrors(fragmentShader, "FRAGMENT");
 
     programID = glCreateProgram();
     glAttachShader(programID, vertexShader);
     glAttachShader(programID, fragmentShader);
     glLinkProgram(programID);
-
-    // Проверка линковки программы
-    checkCompileErrors(programID, "PROGRAM");
 
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
