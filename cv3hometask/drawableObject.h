@@ -1,6 +1,6 @@
-#include "object.h"
+#include "Object.h"
 #include "Transformation.h"
-#include "shaderProgram.h"
+#include "ShaderProgram.h"
 
 class DrawableObject {
 public:

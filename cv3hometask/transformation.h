@@ -1,5 +1,5 @@
 #include <glm/glm.hpp>
-#include "shaderProgram.h"
+#include "ShaderProgram.h"
 
 class Transformation {
 public:

@@ -2,9 +2,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-Transformation::Transformation() : matrix(glm::mat4(1.0f)) {
-    // identyfing
-}
+Transformation::Transformation() : matrix(glm::mat4(1.0f)) {}
 
 void Transformation::translate(float x, float y, float z) {
     matrix = glm::translate(matrix, glm::vec3(x, y, z));
